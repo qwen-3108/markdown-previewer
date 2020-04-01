@@ -25,10 +25,25 @@ class App extends Component {
     this.setState({isLight:!this.state.isLight});
   }
 
+  move = (e) => {
+    let newGrid = e.clientX+'px minmax(0, auto)';
+    document.querySelector('#page').style.gridTemplateColumns = newGrid;
+  }
+
+  resize = (e) => {
+    let page = document.querySelector('#page');
+    page.addEventListener('mousemove', this.move);
+  }
+
+  remove = () => {
+    let page = document.querySelector('#page');
+    page.removeEventListener('mousemove', this.move);
+  }
+
   render(){
 
       return (
-        <div id="page" className={this.state.isLight?'light-mode':'dark-mode'}>
+        <div id="page" className={this.state.isLight?'light-mode':'dark-mode'} onMouseUp={this.remove}>
           <div id="header" >
             <h1>Markdown <span>Previewer</span></h1>
             <Toggle toggle={this.switchMode} state={this.state.isLight}/>
@@ -36,6 +51,7 @@ class App extends Component {
             <div id="editor-wrapper">
               <textarea id="editor" value={this.state.input} onChange={(e) =>
                 this.setState({input:e.target.value})}></textarea>
+              <div id="resize-handle" onMouseDown={this.resize} ></div>
             </div>
             <div id="preview-wrapper">
               <div id="preview"></div>
