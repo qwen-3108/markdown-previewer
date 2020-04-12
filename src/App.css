@@ -16,6 +16,7 @@
 }
 
 /*scrollbar*/
+
 ::-webkit-scrollbar {
   width:6px;
 }
@@ -97,16 +98,21 @@ a:visited{
   transition:all 1s;
   color: var(--text);
   overflow-y:scroll;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
   letter-spacing:0.5px;
 }
 
 #editor:focus{
   outline:none;
+
 }
 
 #editor::-webkit-scrollbar{
   display:none;
 }
+
+
 
 /*editor resize handle*/
 #resize-handle{
@@ -133,4 +139,6 @@ a:visited{
   overflow-y:scroll;
   overflow-wrap:break-word;
   line-height:24px;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
 }

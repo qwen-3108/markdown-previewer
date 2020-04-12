@@ -48,6 +48,7 @@ class App extends Component {
             <h1>Markdown <span>Previewer</span></h1>
             <Toggle toggle={this.switchMode} state={this.state.isLight}/>
             </div>
+
             <div id="editor-wrapper">
               <textarea id="editor" value={this.state.input} onChange={(e) =>
                 this.setState({input:e.target.value})}></textarea>
@@ -55,7 +56,7 @@ class App extends Component {
             </div>
             <div id="preview-wrapper">
               <div id="preview"></div>
-            </div>
+            </div> 
         </div>
       );
   }
