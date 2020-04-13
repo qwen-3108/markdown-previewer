@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   move = (e) => {
-    console.log('move triggered', e.clientX);
+    // console.log('move triggered', e.clientX);
     if(e.clientX>20 && e.clientX<this.state.pageWidth-20){
       let newGrid = e.clientX+'px minmax(0, auto)';
       document.querySelector('#page').style.gridTemplateColumns = newGrid;
