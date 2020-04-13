@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     this.state={
       input:"# Hello World\n\nI'm a markdown previewer powered by [marked.js](https://marked.js.org/#/README.md#README.md)\n\nand built with `react`\n\n## Styles I can preview\n\n- Code block\n\n```\nImport React from 'react';\nconst App = () => {\nreturn();\n};\n```\n\n- Table\n\nHeader 1 | Header 2 | Header 3\n---- |---- | ----\nEntry 1 | Entry 1 | Entry 1\nEntry 2 | Entry 2 | Entry 2\n\n- _Text_ | **Text** | ~Text~ decoration\n\n- Blockquote\n> I'm a Quote!\n\n- Indented and ordered list\n\t- First level\n\t\t- Second level \n\t\t\t1. Numbered\n\t\t\t2. Numbered\n\n- Image\n\n![Twitter icon](https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/Twitter_NEW.png)",
-      isLight:true
+      isLight:true,
+      pageWidth:0
     };
     this.switchMode = this.switchMode.bind(this);
   }
@@ -26,12 +27,17 @@ class App extends Component {
   }
 
   move = (e) => {
-    let newGrid = e.clientX+'px minmax(0, auto)';
-    document.querySelector('#page').style.gridTemplateColumns = newGrid;
+    console.log('move triggered', e.clientX);
+    if(e.clientX>20 && e.clientX<this.state.pageWidth-20){
+      let newGrid = e.clientX+'px minmax(0, auto)';
+      document.querySelector('#page').style.gridTemplateColumns = newGrid;
+    }
   }
 
   resize = (e) => {
     let page = document.querySelector('#page');
+    let width = getComputedStyle(page).width.match(/\d+/);
+    this.setState({pageWidth:Number(width)});
     page.addEventListener('mousemove', this.move);
   }
 
@@ -56,7 +62,7 @@ class App extends Component {
             </div>
             <div id="preview-wrapper">
               <div id="preview"></div>
-            </div> 
+            </div>
         </div>
       );
   }
